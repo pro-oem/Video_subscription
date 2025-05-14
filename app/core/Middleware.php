@@ -17,7 +17,9 @@ class Middleware {
     }
     
     public function authenticate() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         
         // Check if user is logged in
         if (!isset($_SESSION['user_id'])) {
@@ -114,19 +116,23 @@ class Middleware {
     }
     
     private function validateSession() {
-        // Check session expiry
-        if (isset($_SESSION['last_activity']) && 
+        // Check session lifetime
+        if (!isset($_SESSION['last_activity']) || 
             (time() - $_SESSION['last_activity'] > SESSION_LIFETIME)) {
             return false;
         }
         
         // Verify user still exists and is active
         $user = $this->db->query(
-            "SELECT status FROM users WHERE id = ?",
+            "SELECT status FROM users WHERE id = ? LIMIT 1",
             [$_SESSION['user_id']]
         );
         
-        return $user && $user[0]->status === 'active';
+        if (!$user) {
+            return false;
+        }
+        
+        return $user->status === 'active';
     }
     
     private function validateSessionFingerprint() {

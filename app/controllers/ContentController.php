@@ -231,9 +231,7 @@ class ContentController extends Controller {
         }
 
         throw new Exception("Invalid API response");
-    }
-
-    private function isApiRequest() {
+    }    protected function isApiRequest() {
         return (
             isset($_SERVER['HTTP_ACCEPT']) && 
             strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false

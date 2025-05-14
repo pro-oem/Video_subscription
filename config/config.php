@@ -11,13 +11,12 @@ if (!file_exists(__DIR__ . '/../uploads')) {
 }
 
 // Application Settings
-define('BASE_URL', 'http://localhost/video');
+define('BASE_URL', 'http://anxipunk.art');
 define('APP_NAME', 'Video Subscription Platform');
 define('APP_ENV', 'development'); // 'development' or 'production'
 
 // Security Settings
 define('CONTENT_ENCRYPTION_KEY', bin2hex(random_bytes(32))); // Generate new key on first run
-define('SESSION_LIFETIME', 3600); // 1 hour
 define('MAX_LOGIN_ATTEMPTS', 5);
 define('LOGIN_LOCKOUT_TIME', 900); // 15 minutes
 define('PASSWORD_MIN_LENGTH', 8);
@@ -58,7 +57,7 @@ header('X-Frame-Options: DENY');
 header('X-XSS-Protection: 1; mode=block');
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: same-origin');
-header("Content-Security-Policy: default-src 'self' https://cdn.tailwindcss.com; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;");
+header("Content-Security-Policy: default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com;");
 
 // Timezone
 date_default_timezone_set('UTC');

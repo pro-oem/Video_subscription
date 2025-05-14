@@ -6,16 +6,66 @@ class Controller {
     public function __construct() {
         $this->db = Database::getInstance();
         $this->userId = $_SESSION['user_id'] ?? null;
-    }
-
-    protected function view($view, $data = []) {
-        // Add CSRF token to all views
-        $data['csrf_token'] = Middleware::getInstance()->generateCSRFToken();
-        
-        // Extract data to make it available in view
-        extract($data);
-        
-        require_once 'app/views/' . $view . '.php';
+    }    protected function view($view, $data = []) {
+        try {
+            // Convert the view path to absolute path
+            $viewPath = dirname(dirname(__DIR__)) . '/app/views/' . $view . '.php';
+            
+            // Add CSRF token to all views
+            if (!isset($_SESSION['csrf_token'])) {
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            }
+            $data['csrf_token'] = $_SESSION['csrf_token'];
+            
+            // Start output buffering for view content
+            ob_start();
+            
+            // Extract data to make it available in view
+            if (!empty($data)) {
+                extract($data);
+            }
+            
+            // Include the view
+            if (!file_exists($viewPath)) {
+                throw new Exception("View file not found: {$viewPath}");
+            }
+            
+            require $viewPath;
+            
+            // Get the content from the view and store it for layout
+            $data['content'] = ob_get_clean();
+            
+            if (empty(trim($content))) {
+                error_log("View generated empty content: " . $viewPath . ". Data: " . print_r($data, true));
+                throw new Exception("View generated empty content. Please check the error log for details.");
+            }            if (empty(trim($data['content']))) {
+                error_log("View generated empty content: " . $viewPath . ". Data: " . print_r($data, true));
+                throw new Exception("View generated empty content. Please check the error log for details.");
+            }
+            
+            // Start new buffer for layout
+            ob_start();
+            
+            // Include the layout with the captured content
+            $layoutPath = dirname(dirname(__DIR__)) . '/app/views/layouts/main.php';
+            if (!file_exists($layoutPath)) {
+                throw new Exception("Layout file not found: {$layoutPath}");
+            }
+            
+            // Extract data again for layout (includes content)
+            extract($data);
+            
+            require $layoutPath;
+            
+            // Output everything
+            echo ob_get_clean();
+            
+        } catch (Exception $e) {
+            error_log("View Error: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            // Include error view directly without layout
+            include dirname(dirname(__DIR__)) . '/app/views/errors/error.php';
+        }
     }
 
     protected function isSubscribed() {
@@ -39,10 +89,12 @@ class Controller {
     }
 
     protected function requireAuth() {
-        if (!$this->userId) {
+        if (!$this->userId || !isset($_SESSION['user_id'])) {
+            error_log("Auth required - No user ID in session");
             if ($this->isApiRequest()) {
                 $this->jsonResponse(['error' => 'Unauthorized'], 401);
             } else {
+                $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
                 header('Location: ' . BASE_URL . '/auth/login');
                 exit();
             }
@@ -52,12 +104,26 @@ class Controller {
     protected function requireAdmin() {
         $this->requireAuth();
         
-        $user = $this->db->query("SELECT is_admin FROM users WHERE id = ? LIMIT 1", [$this->userId]);
-        if (!$user || !$user->is_admin) {
+        try {
+            $user = $this->db->query("SELECT is_admin FROM users WHERE id = ? LIMIT 1", [$this->userId]);
+            
+            if (!$user || !$user->is_admin) {
+                error_log("Admin access denied for user ID: " . $this->userId);
+                if ($this->isApiRequest()) {
+                    $this->jsonResponse(['error' => 'Forbidden'], 403);
+                } else {
+                    $_SESSION['error'] = 'Access denied. Admin privileges required.';
+                    header('Location: ' . BASE_URL . '/auth/login');
+                    exit();
+                }
+            }
+        } catch (Exception $e) {
+            error_log("Admin check error: " . $e->getMessage());
             if ($this->isApiRequest()) {
-                $this->jsonResponse(['error' => 'Forbidden'], 403);
+                $this->jsonResponse(['error' => 'Internal Server Error'], 500);
             } else {
-                header('Location: ' . BASE_URL);
+                $_SESSION['error'] = 'An error occurred. Please try again.';
+                header('Location: ' . BASE_URL . '/auth/login');
                 exit();
             }
         }

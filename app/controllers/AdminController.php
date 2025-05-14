@@ -2,22 +2,38 @@
 class AdminController extends Controller {
     public function __construct() {
         parent::__construct();
-        // Check if user is admin
-        if (!isset($_SESSION['user_id']) || !$this->isAdmin()) {
+        try {
+            $this->requireAdmin();
+        } catch (Exception $e) {
+            error_log("Admin access error: " . $e->getMessage());
             header('Location: ' . BASE_URL . '/auth/login');
             exit();
         }
     }
 
     private function isAdmin() {
-        $user = $this->db->query("SELECT is_admin FROM users WHERE id = ? LIMIT 1", 
-                                [$_SESSION['user_id']]);
-        return $user && $user->is_admin == 1;
+        try {
+            $user = $this->db->query(
+                "SELECT is_admin FROM users WHERE id = ? AND status = 'active' LIMIT 1", 
+                [$_SESSION['user_id']]
+            );
+            return $user && $user->is_admin == 1;
+        } catch (Exception $e) {
+            error_log("isAdmin check error: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function index() {
-        $content = $this->db->query("SELECT * FROM content ORDER BY created_at DESC");
-        $this->view('admin/dashboard', ['content' => $content]);
+        try {
+            $content = $this->db->query("SELECT * FROM content ORDER BY created_at DESC");
+            $this->view('admin/dashboard', ['content' => $content]);
+        } catch (Exception $e) {
+            error_log("Admin dashboard error: " . $e->getMessage());
+            $this->view('errors/error', [
+                'message' => 'An error occurred while loading the dashboard'
+            ]);
+        }
     }
 
     public function upload() {

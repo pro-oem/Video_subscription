@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Config files
+config/config.php
+
+# Upload directories
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Log files
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

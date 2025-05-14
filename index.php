@@ -3,27 +3,31 @@
 require_once 'app/core/ErrorHandler.php';
 ErrorHandler::initialize();
 
-// Session security settings must be set before starting the session
+// Load all core classes first
+require_once 'app/core/Database.php';
+require_once 'app/core/Utils.php';
+require_once 'app/core/Middleware.php';
+require_once 'app/core/Controller.php';
+require_once 'app/core/AccessLogger.php';
+
+// Load configuration
+require_once 'config/config.php';
+
+// Start session with security settings
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_samesite', 'Lax');
 ini_set('session.gc_maxlifetime', 3600);
 
-// Load configuration first to get constants
-require_once 'config/config.php';
-
-// In development, don't require HTTPS
 if (APP_ENV === 'production' || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')) {
     ini_set('session.cookie_secure', 1);
 }
 
 session_start();
+
+// Load and initialize router
 require_once 'app/core/Router.php';
-require_once 'app/core/Controller.php';
-require_once 'app/core/Database.php';
-require_once 'app/core/Utils.php';
-require_once 'app/core/AccessLogger.php';
-require_once 'app/core/Middleware.php';
+$router = new Router();
 
 // Set security headers with proper CSP
 header('X-Frame-Options: DENY');
@@ -73,7 +77,6 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 
 // Initialize router and handle the request
 try {
-    $router = new Router();
     $router->run();
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();

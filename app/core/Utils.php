@@ -7,24 +7,28 @@ class Utils {
             self::$redis = new Redis();
             self::$redis->connect('127.0.0.1', 6379);
         }
-    }
-
-    public static function checkRateLimit($userId, $action, $limit, $window) {
-        self::initRedis();
-        $key = "rate_limit:{$action}:{$userId}";
+    }    public static function checkRateLimit($userId, $action, $limit, $window) {
+        $now = time();
+        $key = "rate_limit_{$action}_{$userId}";
         
-        $current = self::$redis->get($key);
-        if (!$current) {
-            self::$redis->setex($key, $window, 1);
-            return true;
-        }
-        
-        if ($current >= $limit) {
+        if (!isset($_SESSION[$key])) {
+            $_SESSION[$key] = ['count' => 1, 'first_attempt' => $now];
             return false;
         }
         
-        self::$redis->incr($key);
-        return true;
+        $timeElapsed = $now - $_SESSION[$key]['first_attempt'];
+        
+        if ($timeElapsed > $window) {
+            $_SESSION[$key] = ['count' => 1, 'first_attempt' => $now];
+            return false;
+        }
+        
+        if ($_SESSION[$key]['count'] >= $limit) {
+            return true;
+        }
+        
+        $_SESSION[$key]['count']++;
+        return false;
     }
 
     /**

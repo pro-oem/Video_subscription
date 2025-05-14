@@ -26,12 +26,16 @@ class AuthController extends Controller {
 
                 // Rate limiting check
                 if (Utils::checkRateLimit($_SERVER['REMOTE_ADDR'], 'login', MAX_LOGIN_ATTEMPTS, LOGIN_LOCKOUT_TIME)) {
-                    $_SESSION['error'] = 'Too many login attempts. Please try again later.';
+                    $timeRemaining = ceil(LOGIN_LOCKOUT_TIME / 60);
+                    $_SESSION['error'] = "Too many login attempts. Please wait {$timeRemaining} minutes before trying again.";
                     $this->view('auth/login', ['error' => $_SESSION['error']]);
                     return;
                 }
                 
-                $result = $this->db->query("SELECT * FROM users WHERE email = ? LIMIT 1", [$email]);
+                $result = $this->db->query(
+                    "SELECT * FROM users WHERE email = ? AND status = 'active' LIMIT 1", 
+                    [$email]
+                );
                 $user = !empty($result) ? $result[0] : null;
                 
                 if ($user && password_verify($password, $user->password)) {
@@ -40,14 +44,20 @@ class AuthController extends Controller {
                     
                     // Login successful
                     $_SESSION['user_id'] = $user->id;
-                    $_SESSION['is_admin'] = $user->is_admin;
+                    $_SESSION['is_admin'] = (bool)$user->is_admin;
                     $_SESSION['email'] = $user->email;
                     
                     // Log successful login
-                    error_log("Successful login for user: " . $user->email);
+                    error_log("Successful login for user: " . $user->email . ", is_admin: " . (int)$user->is_admin);
                     
                     // Generate new session ID to prevent session fixation
                     session_regenerate_id(true);
+                    
+                    // Update last login time
+                    $this->db->query(
+                        "UPDATE users SET last_login = NOW() WHERE id = ?",
+                        [$user->id]
+                    );
                     
                     // Set remember me cookie if requested
                     if (isset($_POST['remember-me'])) {
@@ -63,6 +73,7 @@ class AuthController extends Controller {
                         }
                     }
                     
+                    // Redirect based on user role
                     header('Location: ' . BASE_URL . ($user->is_admin ? '/admin' : '/content'));
                     exit();
                 } else {

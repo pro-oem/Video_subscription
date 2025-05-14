@@ -1,0 +1,131 @@
+<?php
+// filepath: c:\xampp\htdocs\video\app\views\layouts\main.php
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= isset($title) ? htmlspecialchars($title) . ' - ' . APP_NAME : APP_NAME ?></title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Custom styles -->
+    <style type="text/tailwindcss">
+        @layer components {
+            /* Layout */
+            .container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 }
+
+            /* Navigation */
+            .navbar { @apply bg-white border-b border-gray-200 }
+            .navbar-content { @apply flex items-center justify-between h-16 }
+            .logo { @apply text-xl font-bold text-indigo-600 hover:text-indigo-500 transition-colors }
+            .nav-links { @apply flex items-center space-x-4 }
+            .nav-link { @apply text-gray-500 hover:text-indigo-600 font-medium transition-colors }
+
+            /* Buttons */
+            .button { @apply inline-flex items-center px-4 py-2 rounded-md font-medium transition-all duration-200 }
+            .button-primary { @apply bg-indigo-600 text-white hover:bg-indigo-700 }
+            .button-secondary { @apply bg-gray-100 text-gray-900 hover:bg-gray-200 }
+
+            /* Alerts */
+            .alert { @apply p-4 mb-4 rounded-lg border }
+            .alert-error { @apply bg-red-50 text-red-700 border-red-200 }
+            .alert-success { @apply bg-green-50 text-green-700 border-green-200 }
+
+            /* Cards */
+            .card { @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden }
+            .card-body { @apply p-6 }
+
+            /* Forms */
+            .form-group { @apply space-y-2 mb-6 }
+            .form-label { @apply block text-sm font-medium text-gray-700 }
+            .form-input { @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 }
+
+            /* Footer */
+            .footer { @apply bg-gray-50 border-t border-gray-200 }
+            .footer-content { @apply container py-12 grid grid-cols-1 md:grid-cols-3 gap-8 }
+            .footer-section { @apply space-y-4 }
+            .footer-title { @apply text-lg font-semibold text-gray-900 }
+            .footer-link { @apply text-gray-500 hover:text-indigo-600 transition-colors }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900">
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="<?= BASE_URL ?>" class="logo">
+                <?= APP_NAME ?>
+            </a>
+            <div class="nav-links">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="<?= BASE_URL ?>/content" class="nav-link">Content</a>
+                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                        <a href="<?= BASE_URL ?>/admin" class="nav-link">Admin</a>
+                    <?php endif; ?>
+                    <a href="<?= BASE_URL ?>/auth/logout" class="button button-secondary">Logout</a>
+                <?php else: ?>
+                    <a href="<?= BASE_URL ?>/auth/login" class="button button-primary">Login</a>
+                    <a href="<?= BASE_URL ?>/auth/register" class="button button-secondary">Register</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-8">
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error">
+                <?= htmlspecialchars($_SESSION['error']) ?>
+                <?php unset($_SESSION['error']); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <?= htmlspecialchars($_SESSION['success']) ?>
+                <?php unset($_SESSION['success']); ?>
+            </div>
+        <?php endif; ?>
+
+        <?= $content ?>
+    </main>
+
+    <footer class="footer mt-auto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title"><?= APP_NAME ?></h3>
+                <p class="text-gray-600">Your trusted video platform</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="<?= BASE_URL ?>" class="footer-link">Home</a></li>
+                    <li><a href="<?= BASE_URL ?>/content" class="footer-link">Content</a></li>
+                    <li><a href="<?= BASE_URL ?>/auth/subscribe" class="footer-link">Subscribe</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Contact</h3>
+                <ul class="space-y-2">
+                    <li><a href="mailto:info@example.com" class="footer-link">info@example.com</a></li>
+                    <li><a href="tel:+1234567890" class="footer-link">+1 234 567 890</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

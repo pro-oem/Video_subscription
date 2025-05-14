@@ -1,7 +1,8 @@
 RewriteEngine On
-RewriteBase /video/
+RewriteBase /
 
-# Allow direct access to public directory
+# Allow direct access to static files
+RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|png|gif|ico|svg|woff2?)$ [NC]
 RewriteRule ^public/(.*)$ public/$1 [L]
 
 # Prevent direct access to sensitive directories
@@ -55,7 +56,7 @@ Options -Indexes
 </Files>
 
 # Prevent access to sensitive files
-<FilesMatch "^\.">
+<FilesMatch "^\." >
     Order allow,deny
     Deny from all
 </FilesMatch>

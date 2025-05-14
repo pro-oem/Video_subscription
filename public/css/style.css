@@ -1,16 +1,22 @@
-/* Tailwind imports */
-@import 'https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css';
-
-/* Custom styles */
-:root {
-    --primary: #1a202c;
-    --secondary: #2d3748;
-    --accent: #4a5568;
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a202c;
+    color: #e2e8f0;
 }
 
-body {
-    @apply bg-gray-100 text-gray-900;
-    font-family: 'Inter', sans-serif;
+/* Form styles */
+.form-input {
+    @apply block w-full rounded-md border-gray-600 bg-dark-200 text-white shadow-sm;
+    @apply focus:border-indigo-500 focus:ring-indigo-500;
+}
+
+.form-label {
+    @apply block text-sm font-medium text-gray-300 mb-1;
+}
+
+.form-group {
+    @apply mb-4;
 }
 
 .container {
