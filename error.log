@@ -1,0 +1,158 @@
+[13-May-2025 14:49:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 52
+[13-May-2025 14:49:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 53
+[13-May-2025 14:49:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 54
+[13-May-2025 14:49:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 55
+[13-May-2025 14:49:12 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 56
+[13-May-2025 12:49:12 UTC] PHP Fatal error:  Uncaught Error: Class "Middleware" not found in C:\xampp\htdocs\video\app\core\Router.php:21
+Stack trace:
+#0 C:\xampp\htdocs\video\index.php(42): Router->__construct()
+#1 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Router.php on line 21
+[13-May-2025 14:52:07 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 52
+[13-May-2025 14:52:07 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 53
+[13-May-2025 14:52:07 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 54
+[13-May-2025 14:52:07 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 55
+[13-May-2025 14:52:07 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 56
+[13-May-2025 12:52:07 UTC] PHP Fatal error:  Uncaught Error: Class "Middleware" not found in C:\xampp\htdocs\video\app\core\Router.php:21
+Stack trace:
+#0 C:\xampp\htdocs\video\index.php(42): Router->__construct()
+#1 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Router.php on line 21
+[13-May-2025 14:56:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 52
+[13-May-2025 14:56:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 53
+[13-May-2025 14:56:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 54
+[13-May-2025 14:56:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 55
+[13-May-2025 14:56:41 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\video\config\config.php on line 56
+[13-May-2025 12:56:41 UTC] PHP Fatal error:  Uncaught Error: Class "Middleware" not found in C:\xampp\htdocs\video\app\core\Router.php:21
+Stack trace:
+#0 C:\xampp\htdocs\video\index.php(42): Router->__construct()
+#1 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Router.php on line 21
+[13-May-2025 13:01:22 UTC] PHP Fatal error:  Uncaught Error: Class "AccessLogger" not found in C:\xampp\htdocs\video\app\core\Middleware.php:9
+Stack trace:
+#0 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#1 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#2 C:\xampp\htdocs\video\index.php(45): Router->__construct()
+#3 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Middleware.php on line 9
+[13-May-2025 13:02:15 UTC] PHP Fatal error:  Uncaught Error: Class "AccessLogger" not found in C:\xampp\htdocs\video\app\core\Middleware.php:9
+Stack trace:
+#0 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#1 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#2 C:\xampp\htdocs\video\index.php(45): Router->__construct()
+#3 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Middleware.php on line 9
+[13-May-2025 13:02:16 UTC] PHP Fatal error:  Uncaught Error: Class "AccessLogger" not found in C:\xampp\htdocs\video\app\core\Middleware.php:9
+Stack trace:
+#0 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#1 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#2 C:\xampp\htdocs\video\index.php(45): Router->__construct()
+#3 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Middleware.php on line 9
+[13-May-2025 13:03:51 UTC] PHP Fatal error:  Declaration of ContentController::view($id) must be compatible with Controller::view($view, $data = []) in C:\xampp\htdocs\video\app\controllers\ContentController.php on line 27
+[13-May-2025 13:08:42 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class AuthController does not have a method "index" in C:\xampp\htdocs\video\app\core\Router.php:62
+Stack trace:
+#0 C:\xampp\htdocs\video\index.php(47): Router->run()
+#1 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Router.php on line 62
+[13-May-2025 13:19:16 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\video\app\core\Middleware.php on line 20
+[13-May-2025 13:19:16 UTC] Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'
+[13-May-2025 13:19:16 UTC] A database error occurred.
+[13-May-2025 13:20:15 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class AuthController does not have a method "index" in C:\xampp\htdocs\video\app\core\Router.php:62
+Stack trace:
+#0 C:\xampp\htdocs\video\index.php(47): Router->run()
+#1 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Router.php on line 62
+[13-May-2025 13:20:21 UTC] PHP Fatal error:  Declaration of ContentController::view($id) must be compatible with Controller::view($view, $data = []) in C:\xampp\htdocs\video\app\controllers\ContentController.php on line 27
+[13-May-2025 13:20:44 UTC] PHP Fatal error:  Declaration of ContentController::view($id) must be compatible with Controller::view($view, $data = []) in C:\xampp\htdocs\video\app\controllers\ContentController.php on line 27
+[13-May-2025 13:21:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class AuthController does not have a method "index" in C:\xampp\htdocs\video\app\core\Router.php:62
+Stack trace:
+#0 C:\xampp\htdocs\video\index.php(47): Router->run()
+#1 {main}
+  thrown in C:\xampp\htdocs\video\app\core\Router.php on line 62
+[13-May-2025 13:30:33 UTC] PHP Fatal error:  Access level to ContentController::isApiRequest() must be protected (as in class Controller) or weaker in C:\xampp\htdocs\video\app\controllers\ContentController.php on line 236
+[14-May-2025 07:50:06 UTC] PHP Fatal error:  Access level to ContentController::isApiRequest() must be protected (as in class Controller) or weaker in C:\xampp\htdocs\video\app\controllers\ContentController.php on line 236
+[14-May-2025 07:50:13 UTC] PHP Parse error:  syntax error, unexpected token "public" in C:\xampp\htdocs\video\app\controllers\AuthController.php on line 68
+[14-May-2025 07:50:17 UTC] PHP Parse error:  syntax error, unexpected token "public" in C:\xampp\htdocs\video\app\controllers\AuthController.php on line 68
+[14-May-2025 08:14:17 UTC] Uncaught Exception: syntax error, unexpected token "public"
+Stack trace: #0 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#1 {main}
+Thrown in C:\xampp\htdocs\video\app\controllers\AuthController.php on line 76
+[14-May-2025 08:14:21 UTC] Uncaught Exception: syntax error, unexpected token "public"
+Stack trace: #0 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#1 {main}
+Thrown in C:\xampp\htdocs\video\app\controllers\AuthController.php on line 76
+[14-May-2025 08:19:49 UTC] Uncaught Exception: syntax error, unexpected token "else", expecting end of file
+Stack trace: #0 C:\xampp\htdocs\video\app\controllers\HomeController.php(14): Controller->view('home/index', Array)
+#1 C:\xampp\htdocs\video\app\core\Router.php(62): HomeController->index()
+#2 C:\xampp\htdocs\video\index.php(77): Router->run()
+#3 {main}
+Thrown in C:\xampp\htdocs\video\app\views\home\index.php on line 73
+[14-May-2025 10:23:06 UTC] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'anxi_admin'@'localhost' (using password: YES)
+[14-May-2025 10:23:06 UTC] Error: Database connection failed. Please try again later.
+File: C:\xampp\htdocs\video\app\core\Database.php
+Line: 22
+Trace:
+#0 C:\xampp\htdocs\video\app\core\Database.php(28): Database->__construct()
+#1 C:\xampp\htdocs\video\app\core\Middleware.php(8): Database::getInstance()
+#2 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#3 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#4 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#5 {main}
+[14-May-2025 10:29:17 UTC] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'anxi_admin'@'localhost' (using password: YES)
+[14-May-2025 10:29:17 UTC] Error: Database connection failed. Please try again later.
+File: C:\xampp\htdocs\video\app\core\Database.php
+Line: 22
+Trace:
+#0 C:\xampp\htdocs\video\app\core\Database.php(28): Database->__construct()
+#1 C:\xampp\htdocs\video\app\core\Middleware.php(8): Database::getInstance()
+#2 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#3 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#4 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#5 {main}
+[14-May-2025 10:31:14 UTC] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'anxi_admin'@'localhost' (using password: YES)
+[14-May-2025 10:31:14 UTC] Error: Database connection failed. Please try again later.
+File: C:\xampp\htdocs\video\app\core\Database.php
+Line: 22
+Trace:
+#0 C:\xampp\htdocs\video\app\core\Database.php(28): Database->__construct()
+#1 C:\xampp\htdocs\video\app\core\Middleware.php(8): Database::getInstance()
+#2 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#3 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#4 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#5 {main}
+[14-May-2025 10:31:15 UTC] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'anxi_admin'@'localhost' (using password: YES)
+[14-May-2025 10:31:15 UTC] Error: Database connection failed. Please try again later.
+File: C:\xampp\htdocs\video\app\core\Database.php
+Line: 22
+Trace:
+#0 C:\xampp\htdocs\video\app\core\Database.php(28): Database->__construct()
+#1 C:\xampp\htdocs\video\app\core\Middleware.php(8): Database::getInstance()
+#2 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#3 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#4 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#5 {main}
+[14-May-2025 10:45:50 UTC] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'anxi_admin'@'localhost' (using password: YES)
+[14-May-2025 10:45:50 UTC] Error: Database connection failed. Please try again later.
+File: C:\xampp\htdocs\video\app\core\Database.php
+Line: 22
+Trace:
+#0 C:\xampp\htdocs\video\app\core\Database.php(28): Database->__construct()
+#1 C:\xampp\htdocs\video\app\core\Middleware.php(8): Database::getInstance()
+#2 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#3 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#4 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#5 {main}
+[14-May-2025 10:45:50 UTC] [E_WARNING] Undefined variable $content in C:\xampp\htdocs\video\app\views\layouts\main.php on line 53
+[14-May-2025 10:46:07 UTC] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'anxi_admin'@'localhost' (using password: YES)
+[14-May-2025 10:46:07 UTC] Error: Database connection failed. Please try again later.
+File: C:\xampp\htdocs\video\app\core\Database.php
+Line: 22
+Trace:
+#0 C:\xampp\htdocs\video\app\core\Database.php(28): Database->__construct()
+#1 C:\xampp\htdocs\video\app\core\Middleware.php(8): Database::getInstance()
+#2 C:\xampp\htdocs\video\app\core\Middleware.php(14): Middleware->__construct()
+#3 C:\xampp\htdocs\video\app\core\Router.php(21): Middleware::getInstance()
+#4 C:\xampp\htdocs\video\index.php(76): Router->__construct()
+#5 {main}
+[14-May-2025 10:46:07 UTC] [E_WARNING] Undefined variable $content in C:\xampp\htdocs\video\app\views\layouts\main.php on line 53
