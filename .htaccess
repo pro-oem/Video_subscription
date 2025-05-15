@@ -49,14 +49,8 @@ Header set Content-Security-Policy "default-src 'self' https://cdn.tailwindcss.c
 # Prevent directory listing
 Options -Indexes
 
-# Disable access to .htaccess
-<Files .htaccess>
-    Order allow,deny
-    Deny from all
-</Files>
-
-# Prevent access to sensitive files
-<FilesMatch "^\." >
+# Disable access to .htaccess and dot files
+<FilesMatch "^\..*">
     Order allow,deny
     Deny from all
 </FilesMatch>
